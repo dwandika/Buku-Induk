@@ -1,23 +1,19 @@
 package Angkatan;
 
 import Class.Angkatan;
+import static Main.menuBukuinduk.ContenPanel;
 import javax.swing.table.DefaultTableModel;
 import org.json.*;
 
-/**
- *
- * @author USER
- */
+
 public class pnAgkatan extends javax.swing.JPanel {
 
-    /**
-     * Creates new form pnAgkatan
-     */
     public pnAgkatan() {
         initComponents();
         tampilAngkatan();
     }
-        void tampilAngkatan() {
+
+    void tampilAngkatan() {
 
         try {
             Angkatan mhs = new Angkatan();
@@ -27,7 +23,6 @@ public class pnAgkatan extends javax.swing.JPanel {
             model.addColumn("No");
             model.addColumn("Angkatan");
 
-
             int rows = obj.getInt("rows");
             JSONArray results = obj.getJSONArray("results");
 //            Kelas.mahasiswa.setDataMhs(results);
@@ -36,7 +31,7 @@ public class pnAgkatan extends javax.swing.JPanel {
                     JSONObject item = results.getJSONObject(i);
 
                     model.addRow(new Object[]{
-                        (i+1),
+                        (i + 1),
                         item.getInt("angkatan")
                     });
                     tbAnkatan.setModel(model);
@@ -63,6 +58,8 @@ public class pnAgkatan extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        tbAnkatan.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        tbAnkatan.setForeground(new java.awt.Color(2, 154, 170));
         tbAnkatan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -74,29 +71,36 @@ public class pnAgkatan extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbAnkatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbAnkatanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbAnkatan);
 
-        jLabel1.setText("BUKU INDUK > ANGKATAN");
+        jLabel1.setFont(new java.awt.Font("DM Sans SemiBold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(2, 154, 170));
+        jLabel1.setText("Buku Induk > Angkatan");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -110,6 +114,18 @@ public class pnAgkatan extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbAnkatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAnkatanMouseClicked
+        int baris = tbAnkatan.rowAtPoint(evt.getPoint());
+        String angkatan = tbAnkatan.getValueAt(baris, 1).toString();
+        Angkatan.setAngkatan(Integer.parseInt(angkatan));
+
+        ContenPanel.removeAll();
+        ContenPanel.add(new popAngkatan());
+        ContenPanel.repaint();
+        ContenPanel.revalidate();
+
+    }//GEN-LAST:event_tbAnkatanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

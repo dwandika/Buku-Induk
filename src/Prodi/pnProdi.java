@@ -4,9 +4,11 @@
  */
 package Prodi;
 
-import Class.Prodi;
+import Class.*;
+import static Main.menuBukuinduk.ContenPanel;
 import javax.swing.table.DefaultTableModel;
 import org.json.*;
+
 /**
  *
  * @author USER
@@ -18,8 +20,9 @@ public class pnProdi extends javax.swing.JPanel {
      */
     public pnProdi() {
         initComponents();
-     tampilProdi();
+        tampilProdi();
     }
+
     void tampilProdi() {
 
         try {
@@ -30,7 +33,6 @@ public class pnProdi extends javax.swing.JPanel {
             model.addColumn("No");
             model.addColumn("Program Studi");
 
-
             int rows = obj.getInt("rows");
             JSONArray results = obj.getJSONArray("results");
 //            mahasiswa.setDataMhs(results);
@@ -38,7 +40,7 @@ public class pnProdi extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
-                   (i+1),
+                        (i + 1),
                         item.getString("prodi")
 
                     });
@@ -49,6 +51,7 @@ public class pnProdi extends javax.swing.JPanel {
             System.out.println(e);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,8 +67,13 @@ public class pnProdi extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("BUKU INDUK > PRODI");
+        jLabel1.setFont(new java.awt.Font("DM Sans SemiBold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(2, 154, 170));
+        jLabel1.setText("Buku Induk > Prodi");
+        jLabel1.setToolTipText("");
 
+        tbProdi.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tbProdi.setForeground(new java.awt.Color(2, 154, 170));
         tbProdi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -77,6 +85,12 @@ public class pnProdi extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbProdi.setToolTipText("");
+        tbProdi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbProdiMouseClicked(evt);
+            }
+        });
         jScrollpane.setViewportView(tbProdi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -86,20 +100,30 @@ public class pnProdi extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 1083, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(jScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(104, 104, 104)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jScrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbProdiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProdiMouseClicked
+        int baris = tbProdi.rowAtPoint(evt.getPoint());
+        String proodi = tbProdi.getValueAt(baris, 1).toString();
+        Prodi.setProdi(proodi);
+        ContenPanel.removeAll();
+        ContenPanel.add(new popProdi());
+        ContenPanel.repaint();
+        ContenPanel.revalidate();
+    }//GEN-LAST:event_tbProdiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

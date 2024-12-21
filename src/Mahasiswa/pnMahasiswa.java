@@ -2,7 +2,7 @@ package Mahasiswa;
 
 import Class.*;
 import javax.swing.table.DefaultTableModel;
-import static Main.MainFrame.ContenPanel;
+import static Main.menuBukuinduk.ContenPanel;
 import org.json.*;
 
 public class pnMahasiswa extends javax.swing.JPanel {
@@ -12,7 +12,6 @@ public class pnMahasiswa extends javax.swing.JPanel {
         loadTabel();
         loadAngkatan();
         loadProdi();
-        cKelas.setVisible(false);
     }
 
     /**
@@ -33,17 +32,23 @@ public class pnMahasiswa extends javax.swing.JPanel {
         tCari = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMahasiswa = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        cKelas = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("BUKU INDUK > MAHASISWA");
+        jLabel1.setFont(new java.awt.Font("DM Sans SemiBold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(2, 154, 170));
+        jLabel1.setText("Buku Induk > Mahasiswa");
 
-        jLabel2.setText("ANGKATAN");
+        jLabel2.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(2, 154, 170));
+        jLabel2.setText("Angkatan");
 
-        jLabel3.setText("PRODI");
+        jLabel3.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(2, 154, 170));
+        jLabel3.setText("Prodi");
 
+        cAngkatan.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        cAngkatan.setForeground(new java.awt.Color(2, 154, 170));
         cAngkatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
         cAngkatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +56,8 @@ public class pnMahasiswa extends javax.swing.JPanel {
             }
         });
 
+        cProdi.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        cProdi.setForeground(new java.awt.Color(2, 154, 170));
         cProdi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
         cProdi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,14 +65,20 @@ public class pnMahasiswa extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(2, 154, 170));
         jLabel4.setText("CARI");
 
+        tCari.setFont(new java.awt.Font("DM Sans SemiBold", 1, 12)); // NOI18N
+        tCari.setForeground(new java.awt.Color(2, 154, 170));
         tCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tCariKeyTyped(evt);
             }
         });
 
+        tbMahasiswa.setFont(new java.awt.Font("DM Sans SemiBold", 0, 12)); // NOI18N
+        tbMahasiswa.setForeground(new java.awt.Color(2, 154, 170));
         tbMahasiswa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -84,67 +97,51 @@ public class pnMahasiswa extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbMahasiswa);
 
-        jLabel5.setText("KELAS");
-
-        cKelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(770, 770, 770))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(cAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(42, 42, 42)
+                                    .addComponent(cAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(cProdi, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(382, 382, 382)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(tCari, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cProdi, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4)))))
+                        .addGap(18, 18, 18)
+                        .addComponent(tCari, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cProdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(10, 10, 10)
-                        .addComponent(tCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cAngkatan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cProdi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(tCari, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,7 +157,6 @@ public class pnMahasiswa extends javax.swing.JPanel {
             tampilAngkatan();
         } else if (!cProdi.getSelectedItem().equals("Semua") && !cAngkatan.getSelectedItem().equals("Semua")) {
             int semester = Integer.parseInt(cAngkatan.getSelectedItem().toString());
-
             mahasiswa.setProdi(cProdi.getSelectedItem().toString());
             mahasiswa.setAngkatan(semester);
             tampilDua();
@@ -180,7 +176,6 @@ public class pnMahasiswa extends javax.swing.JPanel {
             tampilAngkatan();
         } else if (!cProdi.getSelectedItem().equals("Semua") && !cAngkatan.getSelectedItem().equals("Semua")) {
             int angkatan = Integer.parseInt(cAngkatan.getSelectedItem().toString());
-
             mahasiswa.setProdi(cProdi.getSelectedItem().toString());
             mahasiswa.setAngkatan(angkatan);
             tampilDua();
@@ -196,22 +191,21 @@ public class pnMahasiswa extends javax.swing.JPanel {
     private void tbMahasiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMahasiswaMouseClicked
         int baris = tbMahasiswa.rowAtPoint(evt.getPoint());
         mahasiswa.setBaris(baris);
+
         ContenPanel.removeAll();
         ContenPanel.add(new pnProfil());
-        ContenPanel.repaint();
         ContenPanel.revalidate();
+        ContenPanel.repaint();
     }//GEN-LAST:event_tbMahasiswaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cAngkatan;
-    private javax.swing.JComboBox<String> cKelas;
     private javax.swing.JComboBox<String> cProdi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tCari;
     private javax.swing.JTable tbMahasiswa;
@@ -223,6 +217,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
             JSONObject obj = mhs.getMahasiswa();
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nim");
             model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
@@ -236,6 +231,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
+                        (i + 1),
                         item.getString("mhs_nim"),
                         item.getString("mhs_nama"),
                         item.getString("mhs_jk"),
@@ -303,6 +299,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
             JSONObject obj = an.tampilAngkatan();
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nim");
             model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
@@ -316,6 +313,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
+                        (i + 1),
                         item.getString("mhs_nim"),
                         item.getString("mhs_nama"),
                         item.getString("mhs_jk"),
@@ -338,6 +336,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
             JSONObject obj = pd.tampilJurusan();
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nim");
             model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
@@ -351,6 +350,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
+                        (i + 1),
                         item.getString("mhs_nim"),
                         item.getString("mhs_nama"),
                         item.getString("mhs_jk"),
@@ -373,12 +373,12 @@ public class pnMahasiswa extends javax.swing.JPanel {
             JSONObject obj = mhs.tampilDua();
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nim");
             model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
             model.addColumn("Angkatan");
             model.addColumn("Prodi");
-
             int rows = obj.getInt("rows");
             JSONArray results = obj.getJSONArray("results");
             mahasiswa.setDataMhs(results);
@@ -386,6 +386,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
+                        (i + 1),
                         item.getString("mhs_nim"),
                         item.getString("mhs_nama"),
                         item.getString("mhs_jk"),
@@ -396,9 +397,6 @@ public class pnMahasiswa extends javax.swing.JPanel {
                     tbMahasiswa.setModel(model);
                 }
             }
-            loadKelas(cProdi.getSelectedItem().toString(), Integer.parseInt(cAngkatan.getSelectedItem().toString()));
-            cKelas.setVisible(true);
-            cKelas.setSelectedItem("Semua");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -411,6 +409,7 @@ public class pnMahasiswa extends javax.swing.JPanel {
             JSONObject obj = mhs.search();
 
             DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("No");
             model.addColumn("Nim");
             model.addColumn("Nama");
             model.addColumn("Jenis Kelamin");
@@ -424,12 +423,12 @@ public class pnMahasiswa extends javax.swing.JPanel {
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject item = results.getJSONObject(i);
                     model.addRow(new Object[]{
+                        (i + 1),
                         item.getString("mhs_nim"),
                         item.getString("mhs_nama"),
                         item.getString("mhs_jk"),
                         item.getInt("angkatan"),
                         item.getString("prodi")
-
                     });
                     tbMahasiswa.setModel(model);
                 }
@@ -437,29 +436,5 @@ public class pnMahasiswa extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    void loadKelas(String prd, int akt) {
-        try {
-            Kelas ks = new Kelas();
-            ks.setProdi(prd);
-            ks.setAngkatan(akt);
-            JSONObject obj = ks.tampilKelas();
-
-            int rows = obj.getInt("rows");
-            JSONArray results = obj.getJSONArray("results");
-            mahasiswa.setDataMhs(results);
-            if (rows != 0) {
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject item = results.getJSONObject(i);
-                    String kelas = item.getString("kelas");
-                    cKelas.addItem(kelas);
-
-                }
-
-            }
-        } catch (Exception e) {
-        }
-
     }
 }

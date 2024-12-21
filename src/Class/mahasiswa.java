@@ -81,11 +81,11 @@ public class mahasiswa {
     public static void setSearch(String search) {
         mahasiswa.search = search;
     }
-    
+
 
     public JSONObject getMahasiswa() {
 //        query = "SELECT m.mhs_nim, m.mhs_nama, m.mhs_jk, m.angkatan, p.prodi FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 ORDER BY m.angkatan DESC LIMIT 600";
-        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 ORDER BY m.angkatan DESC LIMIT 281474976710656";
+        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 ORDER BY m.angkatan DESC, m.mhs_nim ASC  LIMIT 2000000";
         HttpResponse<String> response = Unirest.post("https://siakad.itmnganjuk.ac.id/api/select")
                 .header("Content-Type", "application/json")
                 .header("Cookie", "siakaditm1=q1399g4dor4strf9b227ojlghp")
@@ -99,15 +99,13 @@ public class mahasiswa {
         if (rows != 0) {
             for (int i = 0; i < results.length(); i++) {
                 JSONObject item = results.getJSONObject(i);
-//                 String nama = item.getString("mhs_nama");
-//                System.out.println(nama);
             }
         }
         return obj;
     }
                    
          public JSONObject tampilDua() {
-        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 AND p.prodi = '"+ prodi +"' AND m.angkatan = "+ angkatan +" ORDER BY m.angkatan DESC LIMIT 600";
+        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 AND p.prodi = '"+ prodi +"' AND m.angkatan = "+ angkatan +" ORDER BY m.angkatan DESC LIMIT 2000000";
         HttpResponse<String> response = Unirest.post("https://siakad.itmnganjuk.ac.id/api/select")
                 .header("Content-Type", "application/json")
                 .header("Cookie", "siakaditm1=q1399g4dor4strf9b227ojlghp")
@@ -124,10 +122,10 @@ public class mahasiswa {
             }
         }
         return obj;
-    }               
+    }         
                     
     public JSONObject search() {
-        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 AND p.deleted = 0 AND m.mhs_nim like '%"+search+"%' OR m.mhs_nama like '%"+search+"%' ORDER BY m.angkatan DESC LIMIT 600";
+        query = "SELECT * FROM t_mhs m LEFT JOIN t_prodi p ON m.prodi_id = p.prodi_id WHERE m.deleted = 0 AND p.deleted = 0  AND p.prodi IS NOT NULL AND m.mhs_nim like '%"+search+"%' OR m.mhs_nama like '%"+search+"%' ORDER BY m.angkatan DESC LIMIT 2000000";
         HttpResponse<String> response = Unirest.post("https://siakad.itmnganjuk.ac.id/api/select")
                 .header("Content-Type", "application/json")
                 .header("Cookie", "siakaditm1=q1399g4dor4strf9b227ojlghp")
@@ -145,9 +143,24 @@ public class mahasiswa {
         }
         return obj;
     }                             
-    
-        public JSONObject searchNim() {
-        query = "SELECT * FROM t_mhs WHERE deleted = 0 AND mhs_nim =" + nim;
+
+        public static ImageIcon base64ToImage(String base64String, int width, int height) {
+        try {
+            if (base64String.contains(",")) {
+                base64String = base64String.split(",")[1];
+            }
+            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
+            ByteArrayInputStream bis = new ByteArrayInputStream(decodedBytes);
+            BufferedImage bufferedImage = ImageIO.read(bis);
+            ImageIcon image = new ImageIcon(bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH));
+            return image;
+        } catch (Exception e) {
+            e.printStackTrace();
+             return null;
+        }
+    }
+         public JSONObject jumlahMahasiswa() {
+        query = "SELECT COUNT(mhs_nim) AS jumlah_mhs FROM t_mhs WHERE deleted = 0";
         HttpResponse<String> response = Unirest.post("https://siakad.itmnganjuk.ac.id/api/select")
                 .header("Content-Type", "application/json")
                 .header("Cookie", "siakaditm1=q1399g4dor4strf9b227ojlghp")
@@ -164,22 +177,7 @@ public class mahasiswa {
             }
         }
         return obj;
-    }
-        public static ImageIcon base64ToImage(String base64String, int width, int height) {
-        try {
-            if (base64String.contains(",")) {
-                base64String = base64String.split(",")[1];
-            }
-            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
-            ByteArrayInputStream bis = new ByteArrayInputStream(decodedBytes);
-            BufferedImage bufferedImage = ImageIO.read(bis);
-            ImageIcon image = new ImageIcon(bufferedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH));
-            return image;
-        } catch (Exception e) {
-            e.printStackTrace();
-             return null;
-        }
-    }
+    }         
 }
 
 
