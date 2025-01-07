@@ -10,10 +10,11 @@ import java.awt.Color;
 import javax.swing.UIManager;
 
 public class menuBukuinduk extends javax.swing.JFrame {
-
+    private String username = sesi.getUsername();
     public menuBukuinduk() {
         initComponents();
         loadDasboard();
+        
         tUser.setText(sesi.getNama());
     }
 
@@ -342,7 +343,7 @@ public class menuBukuinduk extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(2, 131, 145));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cropped-Logo-2-1 150px.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FOTO/aaaaaa.png"))); // NOI18N
         jLabel5.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -446,7 +447,8 @@ public class menuBukuinduk extends javax.swing.JFrame {
     }//GEN-LAST:event_bProdiMouseExited
 
     private void bLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLogoutMouseClicked
-
+     new menu(username).setVisible(true);
+     dispose();
     }//GEN-LAST:event_bLogoutMouseClicked
 
     private void bLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLogoutMouseEntered

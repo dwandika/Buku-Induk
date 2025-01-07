@@ -6,6 +6,9 @@ import javax.swing.UIManager;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import User.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class menu extends javax.swing.JFrame {
 
@@ -14,8 +17,11 @@ public class menu extends javax.swing.JFrame {
     public menu(String username) {
         initComponents();
         menu.username = username;
-        tUser.setText(username);
+        tUser.setText(sesi.getNama());
         loadUserPrivileges(username);
+        displayDate();
+        displayTime();
+        System.out.println(username);
 
     }
 
@@ -31,6 +37,7 @@ public class menu extends javax.swing.JFrame {
             // Aktifkan menu berdasarkan privilege
             while (rs.next()) {
                 String privilege = rs.getString("nama_privilege");
+                System.out.println(privilege);
                 enableMenu(privilege);
             }
         } catch (SQLException e) {
@@ -47,15 +54,9 @@ public class menu extends javax.swing.JFrame {
         bManagemntsurat.setVisible(isVisible);
         bPerpustakaan.setVisible(isVisible);
         bKepegawaian.setVisible(isVisible);
-        bottonTH();
+        
     }
-    private void bottonTH(){
-    frameUser fU = new frameUser();
-    
-        fU.bTambah.setVisible(false);
-        fU.bHapus.setVisible(false);
-    
-    }
+
     private void enableMenu(String privilegeName) {
         switch (privilegeName) {
             case "Kepegawaian":
@@ -78,7 +79,19 @@ public class menu extends javax.swing.JFrame {
                 break;
         }
     }
+    private void displayDate() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy"); 
+        String formattedDate = currentDate.format(formatter);
+        tTanggal.setText(formattedDate);
+    }
 
+    private void displayTime() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm"); 
+        String formattedTime = currentTime.format(formatter);
+        tJam.setText(formattedTime);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,7 +134,7 @@ public class menu extends javax.swing.JFrame {
             }
         });
 
-        tUser.setFont(new java.awt.Font("DM Sans SemiBold", 0, 18)); // NOI18N
+        tUser.setFont(new java.awt.Font("DM Sans SemiBold", 0, 14)); // NOI18N
         tUser.setForeground(new java.awt.Color(255, 255, 255));
         tUser.setText("Admin");
 
@@ -143,8 +156,8 @@ public class menu extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(bUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tUser, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 484, Short.MAX_VALUE)
+                .addComponent(tUser, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tTanggal, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tJam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,7 +260,6 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bLogoutMouseExited
 
     private void bBukuIndukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBukuIndukActionPerformed
-
         new menuBukuinduk().setVisible(true);
         dispose();
     }//GEN-LAST:event_bBukuIndukActionPerformed
@@ -257,8 +269,8 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bPembayaranActionPerformed
 
     private void bUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bUserMouseClicked
-        new frameUser().setVisible(true);
-        dispose();
+        new popUser().setVisible(true);
+        
     }//GEN-LAST:event_bUserMouseClicked
 
     /**

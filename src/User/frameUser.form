@@ -107,7 +107,7 @@
                                   <Component id="tPass" max="32767" attributes="0"/>
                                   <Component id="cRole" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="cRole1" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
+                              <Component id="cStatus" alignment="0" min="-2" pref="291" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -146,7 +146,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cRole1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cStatus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbBukuinduk" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -355,7 +355,7 @@
             <Property name="text" type="java.lang.String" value="STATUS"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cRole1">
+        <Component class="javax.swing.JComboBox" name="cStatus">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="DM Sans SemiBold" size="12" style="0"/>

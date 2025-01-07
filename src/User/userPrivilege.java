@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 public class userPrivilege {
 
@@ -47,13 +46,26 @@ public class userPrivilege {
             ps.setString(2, username);
             ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(null, "user Berhasil Ditambahkan");
 
         } catch (SQLException sQLException) {
-            JOptionPane.showMessageDialog(null, "user Gagal Ditambahkan");
             System.out.println(sQLException);
         }
     }
+    public void ubahUserPrivilege() {
+        query = "UPDATE userprivilege SET id_privilege = ? WHERE username = ?";
+        try {
+            ps = konek.prepareStatement(query);
+            ps.setInt(1, idPrivilege);
+            ps.setString(2, username);
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException);
+        }
+    }
+    
+
 
     public ResultSet loadUserPrivilege() {
 
@@ -63,10 +75,10 @@ public class userPrivilege {
             ps.setString(1, username);
 
             rs = ps.executeQuery();
-            System.out.println("data masuk");
+            System.out.println("data masuk userPrivilege");
 
         } catch (SQLException SQLException) {
-            System.out.println("data tidak masuk");
+            System.out.println("data tidak masuk userPrivilege");
         }
         return rs;
     }

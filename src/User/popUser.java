@@ -1,29 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package User;
-import User.*;
 
-/**
- *
- * @author USER
- */
 public class popUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form popUser
-     */
     public popUser() {
         initComponents();
         tNama.setText(sesi.getNama());
         tUser.setText(sesi.getUsername());
-         if (sesi.getStatus().equals(1)) {
-                tRole.setText("Aktif");
-
-            } else {
-                tRole.setText("Tidak Aktif");
-            }
     }
 
     /**
@@ -39,7 +21,6 @@ public class popUser extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tNama = new javax.swing.JLabel();
         tUser = new javax.swing.JLabel();
-        tRole = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,14 +40,9 @@ public class popUser extends javax.swing.JFrame {
         tUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tUser.setText("jLabel3");
 
-        tRole.setFont(new java.awt.Font("DM Sans SemiBold", 0, 18)); // NOI18N
-        tRole.setForeground(new java.awt.Color(255, 255, 255));
-        tRole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tRole.setText("jLabel4");
-
         jButton1.setFont(new java.awt.Font("DM Sans ExtraBold", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 102));
-        jButton1.setText("Ubah");
+        jButton1.setText("Detail");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +56,6 @@ public class popUser extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(tUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -96,9 +71,7 @@ public class popUser extends javax.swing.JFrame {
                 .addComponent(tNama)
                 .addGap(18, 18, 18)
                 .addComponent(tUser)
-                .addGap(18, 18, 18)
-                .addComponent(tRole)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -119,6 +92,7 @@ public class popUser extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        new User.frameUser().setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -161,7 +135,6 @@ public class popUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel tNama;
-    private javax.swing.JLabel tRole;
     private javax.swing.JLabel tUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,10 +75,9 @@ public class user {
             ps.setInt(5, role);
             ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(null, "user Berhasil Ditambahkan");
 
         } catch (SQLException sQLException) {
-            JOptionPane.showMessageDialog(null, "user Gagal Ditambahkan");
+            JOptionPane.showMessageDialog(null, sQLException);
         }
     }
 
@@ -125,10 +124,9 @@ public class user {
 
                 ps.executeUpdate();
                 ps.close();
-                JOptionPane.showMessageDialog(null, "User Berhasil Di Ubah");
 
             } catch (SQLException sQLException) {
-                JOptionPane.showMessageDialog(null, "user Gagal Di Ubah");
+                JOptionPane.showMessageDialog(null, sQLException);
             }
         } else {
             query = "UPDATE useradmin SET "
@@ -149,10 +147,9 @@ public class user {
 
                 ps.executeUpdate();
                 ps.close();
-                JOptionPane.showMessageDialog(null, "user Berhasil Di Ubah");
 
             } catch (SQLException sQLException) {
-                JOptionPane.showMessageDialog(null, "user Gagal Di Ubah");
+                JOptionPane.showMessageDialog(null,sQLException);
             }
 
         }
@@ -187,7 +184,7 @@ public class user {
                 sesi.setUsername(rs.getString("username"));
 //                sesi.setStatus(String.valueOf(rs.getInt("status")));
             } else {
-                sesi.setStatus("Tidak Aktif");
+                sesi.setStatus("Tidak Aktif"); 
                 JOptionPane.showMessageDialog(null, "Username atau password salah");
             }
         } catch (SQLException sQLException) {

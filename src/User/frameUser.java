@@ -1,19 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package User;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.swing.table.DefaultTableModel;
-import Main.*;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+
 
 public class frameUser extends javax.swing.JFrame {
 
     public frameUser() {
         initComponents();
         loadTabel();
+        disableBotton();
+    }
+    void disableBotton(){
+        if (sesi.getUsername().equals("superadmin")) {
+            bHapus.setVisible(true);
+            bTambah.setVisible(true);
+        } else {
+            bHapus.setVisible(false);
+            bTambah.setVisible(false);
+        }
+    
     }
 
     /**
@@ -40,7 +48,7 @@ public class frameUser extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUser = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        cRole1 = new javax.swing.JComboBox<>();
+        cStatus = new javax.swing.JComboBox<>();
         cbBukuinduk = new javax.swing.JCheckBox();
         cbPembayaran = new javax.swing.JCheckBox();
         cbInventaris = new javax.swing.JCheckBox();
@@ -137,10 +145,10 @@ public class frameUser extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("STATUS");
 
-        cRole1.setFont(new java.awt.Font("DM Sans SemiBold", 0, 12)); // NOI18N
-        cRole1.setForeground(new java.awt.Color(0, 0, 102));
-        cRole1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aktif", "Tidak Aktif" }));
-        cRole1.setToolTipText("");
+        cStatus.setFont(new java.awt.Font("DM Sans SemiBold", 0, 12)); // NOI18N
+        cStatus.setForeground(new java.awt.Color(0, 0, 102));
+        cStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aktif", "Tidak Aktif" }));
+        cStatus.setToolTipText("");
 
         cbBukuinduk.setBackground(new java.awt.Color(0, 0, 102));
         cbBukuinduk.setFont(new java.awt.Font("DM Sans SemiBold", 0, 12)); // NOI18N
@@ -241,7 +249,7 @@ public class frameUser extends javax.swing.JFrame {
                                 .addComponent(tNama)
                                 .addComponent(tPass)
                                 .addComponent(cRole, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cRole1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -274,7 +282,7 @@ public class frameUser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cRole1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbBukuinduk)
@@ -315,58 +323,45 @@ public class frameUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
-        try {
+try {
             user user = new user();
-            userPrivilege up = new userPrivilege();
+            privilage up = new privilage();
+            userPrivilege upp = new userPrivilege();
+
             user.setUserName(tUsername.getText());
             user.setPassword(tPass.getText());
             user.setNama(tNama.getText());
-            if (cRole.getSelectedItem().equals("Admin")) {
-                user.setRole(1);
-            } else {
-                user.setRole(0);
-            }
-            if (cRole1.getSelectedItem().equals("Aktif")) {
-                user.setStatus(1);
-            } else {
-                user.setStatus(0);
-            }
+            user.setRole(cRole.equals("Admin") ? 0 : 1);
+            user.setStatus(cStatus.equals("Aktif") ? 0 : 1);
 
-            if (cbBukuinduk.isSelected()) {
-                up.setIdPrivilege(1);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbPembayaran.isSelected()) {
-                up.setIdPrivilege(2);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbInventaris.isSelected()) {
-                up.setIdPrivilege(3);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbSurat.isSelected()) {
-                up.setIdPrivilege(4);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbKepegawaian.isSelected()) {
-                up.setIdPrivilege(5);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbPerpus.isSelected()) {
-                up.setIdPrivilege(6);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            user.tambahUser();
+            ResultSet rs = up.tampilPrivilege();
+                while (rs.next()) {
+                    int idPrivilege = rs.getInt("id_privilege");
+                    String namaPrivilege = rs.getString("nama_privilege"); 
+                    JCheckBox[] checkboxes = {cbBukuinduk, cbPembayaran, cbInventaris, cbSurat, cbKepegawaian, cbPerpus};
+
+                    for (JCheckBox checkbox : checkboxes) {
+                        if (checkbox.getText().equals(namaPrivilege) && checkbox.isSelected()) {
+                            upp.setIdPrivilege(idPrivilege);
+                            upp.setUsername(tUsername.getText());
+                            user.tambahUser();
+                            upp.tambahUserPrivilege();
+                        }
+                    }
+                }
+            
+
+            
+
             loadTabel();
             reset();
-        } catch (SQLException sQLException) {
+
+            JOptionPane.showMessageDialog(null, "User berhasil ditambahkan.");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal menambahkan user.");
+            ex.printStackTrace();
         }
+
     }//GEN-LAST:event_bTambahActionPerformed
 
     private void tUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tUsernameActionPerformed
@@ -385,57 +380,45 @@ public class frameUser extends javax.swing.JFrame {
     }//GEN-LAST:event_bHapusActionPerformed
 
     private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
-        try {
-            user usr = new user();
-            userPrivilege up = new userPrivilege();
-            usr.setUserName(tUsername.getText());
-            usr.setNama(tNama.getText());
-            usr.setPassword(tPass.getText());
-            if (cRole.getSelectedItem().equals("Admin")) {
-                usr.setRole(1);
-            } else {
-                usr.setRole(0);
-            }
-            if (cRole1.getSelectedItem().equals("Aktif")) {
-                usr.setStatus(1);
-            } else {
-                usr.setStatus(0);
-            }
-            usr.ubahUser();
-            if (cbBukuinduk.isSelected()) {
-                up.setIdPrivilege(1);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbPembayaran.isSelected()) {
-                up.setIdPrivilege(2);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbInventaris.isSelected()) {
-                up.setIdPrivilege(3);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbSurat.isSelected()) {
-                up.setIdPrivilege(4);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbKepegawaian.isSelected()) {
-                up.setIdPrivilege(5);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-            if (cbPerpus.isSelected()) {
-                up.setIdPrivilege(6);
-                up.setUsername(tUsername.getText());
-                up.tambahUserPrivilege();
-            }
-        } catch (SQLException sQLException) {
+try {
+            user user = new user();
+            privilage up = new privilage();
+            userPrivilege upp = new userPrivilege();
+
+            user.setUserName(tUsername.getText());
+            user.setPassword(tPass.getText());
+            user.setNama(tNama.getText());
+            user.setRole(cRole.equals("Admin") ? 0 : 1);
+            user.setStatus(cStatus.equals("Aktif") ? 0 : 1);
+
+            ResultSet rs = up.tampilPrivilege();
+                while (rs.next()) {
+                    int idPrivilege = rs.getInt("id_privilege");
+                    String namaPrivilege = rs.getString("nama_privilege"); 
+                    JCheckBox[] checkboxes = {cbBukuinduk, cbPembayaran, cbInventaris, cbSurat, cbKepegawaian, cbPerpus};
+
+                    for (JCheckBox checkbox : checkboxes) {
+                        if (checkbox.getText().equals(namaPrivilege) && checkbox.isSelected()) {
+                            upp.setIdPrivilege(idPrivilege);
+                            upp.setUsername(tUsername.getText());
+                            user.ubahUser();
+                            upp.ubahUserPrivilege();
+                        }
+                    }
+                }
+            
+
+            
+
+            loadTabel();
+            reset();
+
+            JOptionPane.showMessageDialog(null, "User berhasil diubsh.");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal mengubah user.");
+            ex.printStackTrace();
         }
-        loadTabel();
-        reset();
+
     }//GEN-LAST:event_bUbahActionPerformed
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
@@ -449,7 +432,7 @@ public class frameUser extends javax.swing.JFrame {
         tUsername.setEditable(false);
         tNama.setText(name);
         cRole.setSelectedItem(role);
-        cRole1.setSelectedItem(status);
+        cStatus.setSelectedItem(status);
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void bBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackActionPerformed
@@ -497,7 +480,7 @@ public class frameUser extends javax.swing.JFrame {
     public javax.swing.JButton bTambah;
     private javax.swing.JButton bUbah;
     private javax.swing.JComboBox<String> cRole;
-    private javax.swing.JComboBox<String> cRole1;
+    private javax.swing.JComboBox<String> cStatus;
     private javax.swing.JCheckBox cbBukuinduk;
     private javax.swing.JCheckBox cbInventaris;
     private javax.swing.JCheckBox cbKepegawaian;
@@ -547,7 +530,7 @@ public class frameUser extends javax.swing.JFrame {
         tPass.setText(null);
         tNama.setText(null);
         cRole.setSelectedItem(null);
-        cRole1.setSelectedItem(null);
+        cStatus.setSelectedItem(null);
         cbBukuinduk.setSelected(false);
         cbPembayaran.setSelected(false);
         cbInventaris.setSelected(false);

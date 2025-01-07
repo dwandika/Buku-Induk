@@ -58,8 +58,8 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="bUser" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tUser" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace pref="484" max="32767" attributes="0"/>
+                      <Component id="tUser" min="-2" pref="177" max="-2" attributes="0"/>
+                      <EmptySpace pref="416" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="tTanggal" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="tJam" alignment="1" min="-2" pref="39" max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
             <Component class="javax.swing.JLabel" name="tUser">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DM Sans SemiBold" size="18" style="0"/>
+                  <Font name="DM Sans SemiBold" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
